@@ -104,7 +104,7 @@ cc.Class({
                     for(var i = 0; i < self.total_scenario_num; i++){
                         self.setCharacterToNode(self.ary_chara_and_node[i][0], self.ary_chara_and_node[i][1]);
                     }
-                    
+
                     for(var i = 0; i < self.total_scenario_num; i++){
                         self.now_character = self.dataJson.story[self.now_story_no].scenario[i].character;
                         self.characters[self.now_character - 1].active = true;
