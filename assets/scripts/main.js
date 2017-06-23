@@ -67,9 +67,7 @@ cc.Class({
             self.scenarioRunning = true;
 
             // キャラをノードにセット
-            var ary_of_chara = self.getArrayOfAppearCharacter();
-            self.setCharacterToNode(ary_of_chara);
-            
+            self.ary_chara_and_node = self.getNowCharacterAndNode();
         });
         // タッチイベント初期化
         this.setTouchEvent();
@@ -103,6 +101,10 @@ cc.Class({
                     self.showTextFin = true; // テキスト表示終了扱い
 
                     // シナリオのキャラ全部を表示させる
+                    for(var i = 0; i < self.total_scenario_num; i++){
+                        self.setCharacterToNode(self.ary_chara_and_node[i][0], self.ary_chara_and_node[i][1]);
+                    }
+                    
                     for(var i = 0; i < self.total_scenario_num; i++){
                         self.now_character = self.dataJson.story[self.now_story_no].scenario[i].character;
                         self.characters[self.now_character - 1].active = true;
@@ -141,9 +143,8 @@ cc.Class({
                     self.showTextFin = false;
                     self.scenarioRunning = true;
 
-                    // キャラをノードにセット
-                    var ary_of_chara = self.getArrayOfAppearCharacter();
-                    self.setCharacterToNode(ary_of_chara);
+                    // キャラとノードの配列を得る
+                    self.ary_chara_and_node = self.getNowCharacterAndNode();
                 }
                 // 以降のイベントも取得する場合はtrueを返す
                 return true;
@@ -165,6 +166,7 @@ cc.Class({
                 }
                 
                 // キャラクタを表示する
+                this.setCharacterToNode(this.ary_chara_and_node[this.now_scenario_no][0], this.ary_chara_and_node[this.now_scenario_no][1]);
                 this.now_character = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].character;
                 this.characters[this.now_character - 1].active = true;
                 this.characters[this.now_character - 1].opacity = 100 + (255-100) * this.charaTimer;
@@ -244,36 +246,32 @@ cc.Class({
     },
 
     // 現在のstoryで登場するキャラクターの順番を配列に入れてreturn
-    getArrayOfAppearCharacter: function(){
-        var ary_of_chara = [];
+    getNowCharacterAndNode: function(){
+        var ary_chara_and_node = [];
         for(var i = 0; i < this.dataJson.story[this.now_story_no].scenario.length; i++){
-            var tmp = this.dataJson.story[this.now_story_no].scenario[i].character;
-            var counter = 0;
-            for(var j = 0; j < ary_of_chara.length; j++){
-                if(tmp == ary_of_chara[j]){ break; }
-                counter++;
-            }
-            if(counter == ary_of_chara.length){
-                ary_of_chara.push(tmp);
-            }
+            var tmp = [
+                this.dataJson.story[this.now_story_no].scenario[i].character,
+                this.dataJson.story[this.now_story_no].scenario[i].node_no
+            ];
+            ary_chara_and_node.push(tmp);
         }
-        return ary_of_chara;
+        return ary_chara_and_node;
     },
     // 登場キャラクタ数に応じて、登場位置を設定
-    setCharacterToNode: function(ary_of_chara){
-        var num = ary_of_chara.length;
-        // 登場キャラ数によって分岐
-        if(num == 1){
-            this.characters[ary_of_chara[0] - 1].x = 0;
-        }else if(num == 2){
-            this.characters[ary_of_chara[0] - 1].x = -200;
-            this.characters[ary_of_chara[1] - 1].x = 200;
-        }else if(num == 3){
-            this.characters[ary_of_chara[0] - 1].x = 0;
-            this.characters[ary_of_chara[1] - 1].x = -350;
-            this.characters[ary_of_chara[2] - 1].x = 350;
-        }else{
-            return;
+    setCharacterToNode: function(chara_no, node_no){
+        switch(node_no){
+            case 1:
+                this.characters[chara_no - 1].x = -350; break;
+            case 2:
+                this.characters[chara_no - 1].x = 0; break;
+            case 3:
+                this.characters[chara_no - 1].x = 350; break;
+            case 4:
+                this.characters[chara_no - 1].x = -200; break;
+            case 5:
+                this.characters[chara_no - 1].x = 200; break;
+            default:
+                return;
         }
     }
 });
