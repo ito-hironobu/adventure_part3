@@ -1,0 +1,24 @@
+{
+  "appKey": "",
+  "appSecret": "",
+  "excludeScenes": [],
+  "includeAnySDK": false,
+  "includeSdk": [
+    "anysdk"
+  ],
+  "inlineSpriteFrames": true,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.AdventureModule",
+  "privateKey": "",
+  "renderMode": "0",
+  "startScene": "bff9ee7c-a9b3-4689-908a-a13cc86a997a",
+  "title": "AdventureModule",
+  "webOrientation": "auto"
+}

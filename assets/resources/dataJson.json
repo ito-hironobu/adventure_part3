@@ -1,0 +1,135 @@
+{
+    "story": [
+        {
+            "story_no": 1,
+            "scenario": [
+                {
+                    "scenario_no": 1,
+                    "character": 1,
+                    "node_no": 2,
+                    "talk": [
+                        "作業員：社長！おはようございます！！"
+                    ]
+                },
+                {
+                    "scenario_no": 2,
+                    "character": 3,
+                    "node_no": 1,
+                    "talk": [
+                        "社長：おお、ご苦労さん。精がでるねぇ。ところで君、名前は？"
+                    ]
+                },
+                {
+                    "scenario_no": 3,
+                    "character": 2,
+                    "node_no": 3,
+                    "talk": [
+                        "おやすみでござんす。"
+                    ]
+                }
+            ]
+            
+        },
+        {
+            "story_no": 2,
+            "scenario": [
+                {
+                    "scenario_no": 1,
+                    "character": 1,
+                    "node_no": 4,
+                    "talk": [
+                        "作業員：群馬の山奥でございます！！"
+                    ]
+                },
+                {
+                    "scenario_no": 2,
+                    "character": 3,
+                    "node_no": 5,
+                    "talk": [
+                        "社長：ほぉ、群馬の山奥ねぇ。草津温泉かね？"
+                    ]
+                }
+            ]
+            
+        },
+        {
+            "story_no": 3,
+            "scenario": [
+                {
+                    "scenario_no": 1,
+                    "character": 1,
+                    "node_no": 4,
+                    "talk": [
+                        "作業員：群馬の山奥でございます！！"
+                    ]
+                },
+                {
+                    "scenario_no": 2,
+                    "character": 3,
+                    "node_no": 5,
+                    "talk": [
+                        "社長：ほぉ、群馬の山奥ねぇ。草津温泉かね？"
+                    ]
+                }
+            ]
+            
+        },
+        {
+            "story_no": 4,
+            "scenario": [
+                {
+                    "scenario_no": 1,
+                    "character": 1,
+                    "node_no": 4,
+                    "talk": [
+                        "作業員：いえっ！もっともっと奥でございます！"
+                    ]
+                },
+                {
+                    "scenario_no": 2,
+                    "character": 3,
+                    "node_no": 5,
+                    "talk": [
+                        "社長：あっそ"
+                    ]
+                }
+            ]
+            
+        },
+        {
+            "story_no": 5,
+            "scenario": [
+                {
+                    "scenario_no": 1,
+                    "character": 2,
+                    "node_no": 2,
+                    "talk": [
+                        "腰巾着１：社長、お車の用意ができましたので、ささ、どうぞこちらへ",
+                        "腰巾着１：お足元にお気を付けあそばせ"
+                    ]
+                }
+            ]
+            
+        },
+        {
+            "story_no": 6,
+            "scenario": [
+                {
+                    "scenario_no": 1,
+                    "character": 3,
+                    "node_no": 4,
+                    "talk": [
+                        "おやすみなさい　でござる。"
+                    ]
+                },
+                {
+                    "scenario_no": 2,
+                    "character": 5,
+                    "talk": [
+                        "おやすみでござんす。"
+                    ]
+                }
+            ]
+        }
+    ]
+}
