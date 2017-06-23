@@ -60,28 +60,6 @@
                     "character": 1,
                     "node_no": 4,
                     "talk": [
-                        "作業員：群馬の山奥でございます！！"
-                    ]
-                },
-                {
-                    "scenario_no": 2,
-                    "character": 3,
-                    "node_no": 5,
-                    "talk": [
-                        "社長：ほぉ、群馬の山奥ねぇ。草津温泉かね？"
-                    ]
-                }
-            ]
-            
-        },
-        {
-            "story_no": 4,
-            "scenario": [
-                {
-                    "scenario_no": 1,
-                    "character": 1,
-                    "node_no": 4,
-                    "talk": [
                         "作業員：いえっ！もっともっと奥でございます！"
                     ]
                 },
@@ -97,7 +75,7 @@
             
         },
         {
-            "story_no": 5,
+            "story_no": 4,
             "scenario": [
                 {
                     "scenario_no": 1,
@@ -112,7 +90,7 @@
             
         },
         {
-            "story_no": 6,
+            "story_no": 5,
             "scenario": [
                 {
                     "scenario_no": 1,
