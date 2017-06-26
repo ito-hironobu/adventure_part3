@@ -24,6 +24,26 @@ cc.Class({
     
     // use this for initialization
     onLoad: function () {
+        this.canvas = cc.find('Canvas');
+        var self = this;
+        // load SpriteFrame
+        //*/
+        var node = new cc.Node("New Sprite");
+        var sprite = node.addComponent(cc.Sprite);
+        node.parent = this.canvas;
+        var image = cc.url.raw("resources/images.jpeg");
+        var texture = cc.textureCache.addImage(image);
+        sprite.spriteFrame= new cc.SpriteFrame(texture);
+        
+        //*/
+
+        /*/
+        cc.loader.loadRes("images.jpeg", cc.SpriteFrame, function (err, spriteFra) {
+            //self.node.getComponent(cc.Sprite).spriteFrame = spriteFra;
+            self.spriteFrame = spriteFra;
+        });
+        */
+
         this.charaTimer = 0;
         this.textTimer = 0;
         this.showCharaFin = false;
