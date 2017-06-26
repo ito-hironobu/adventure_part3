@@ -25,9 +25,8 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.canvas = cc.find('Canvas');
-        var self = this;
-        // load SpriteFrame
-        //*/
+        
+        // load SpriteFrame 画像をresourcesから読み込む
         var node = new cc.Node("New Sprite");
         var sprite = node.addComponent(cc.Sprite);
         node.parent = this.canvas;
@@ -35,15 +34,6 @@ cc.Class({
         var texture = cc.textureCache.addImage(image);
         sprite.spriteFrame= new cc.SpriteFrame(texture);
         
-        //*/
-
-        /*/
-        cc.loader.loadRes("images.jpeg", cc.SpriteFrame, function (err, spriteFra) {
-            //self.node.getComponent(cc.Sprite).spriteFrame = spriteFra;
-            self.spriteFrame = spriteFra;
-        });
-        */
-
         this.charaTimer = 0;
         this.textTimer = 0;
         this.showCharaFin = false;
@@ -58,6 +48,8 @@ cc.Class({
 
         this.talkText.string = "";
         this.tmp = "";
+
+        var self = this;
 
         // プレハブを先に生成しておく（出現/消去はactiveを使って操作する）
         this.canvas = cc.find('Canvas');
