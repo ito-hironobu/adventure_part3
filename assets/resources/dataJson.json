@@ -1,4 +1,19 @@
 {
+    "character": [
+        {
+            "character_no": 1,
+            "character_url": "a.png"
+        },
+        {
+            "character_no": 2,
+            "character_url": "b.png"
+        },
+        {
+            "character_no": 3,
+            "character_url": "c.png"
+        }
+    ],
+    
     "story": [
         {
             "story_no": 1,
