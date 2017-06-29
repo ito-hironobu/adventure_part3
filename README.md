@@ -11,7 +11,6 @@ Cocos2d-JS で動作するアドベンチャパートです。
 ## デモ
 
 ここにデモ用の URL を記載してください
-http://192.168.1.234:7456/build
 
 ## 動作環境
 
@@ -23,7 +22,7 @@ http://192.168.1.234:7456/build
 
 ## インストール
 
-git clone git@github.com:ito-hironobu/adventure_part.git
+git clone git@github.com:ito-hironobu/adventure_part3.git
 
 ## コントリビューション
 
