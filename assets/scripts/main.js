@@ -56,13 +56,27 @@ cc.Class({
     },
 
     // 画像ロード、Canvasにぶら下げ、characte.js付与
-    imageLoaded: function(texture) {
+    loadImgFromUrl: function(url) {
         var new_node = new cc.Node()
         var sprite = new_node.addComponent(cc.Sprite);
+        sprite.spriteFrame = new cc.SpriteFrame(url);
+        sprite.addComponent(character);
+        new_node.parent = this.canvas;
+        sprite.trim = false;
+        sprite.node.active = false;
+        // 全画像ロード完了なら、フラグを立てる。
+        if(this.canvas.children[this.dataJson.character.length - 1]){
+            this.finish_load_character = true;
+        }
+    },
+    loadImgFromRes: function(url){
+        var new_node = new cc.Node();		
+        var sprite = new_node.addComponent(cc.Sprite);		
+        var image = cc.url.raw(url);
+        var texture = cc.textureCache.addImage(image);
         sprite.spriteFrame = new cc.SpriteFrame(texture);
         sprite.addComponent(character);
         new_node.parent = this.canvas;
-        cc.log(sprite);
         sprite.trim = false;
         sprite.node.active = false;
         // 全画像ロード完了なら、フラグを立てる。
@@ -160,7 +174,11 @@ cc.Class({
             this.finish_load_json = false; // １度しか入ってこれないように
             for(var i = 0; i < this.dataJson.character.length; i++){
                 var url = this.dataJson.character[i].url;
-                cc.textureCache.addImageAsync(url, this.imageLoaded, this)
+                if(url.substr(0, 10) == "resources/"){
+                    this.loadImgFromRes(url);
+                }else{
+                    cc.textureCache.addImageAsync(url, this.loadImgFromUrl, this)
+                }
             }
         }
         // 外部画像を取り込めていないならreturn
