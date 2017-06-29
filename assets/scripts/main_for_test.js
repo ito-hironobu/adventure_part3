@@ -9,11 +9,35 @@ cc.Class({
             type: cc.Label
         },
     },
-
+    
     // use this for initialization
     onLoad: function () {
+        var xhr = new XMLHttpRequest();
+        cc.log(xhr);
         this.canvas = cc.find('Canvas');
-
+        
+        // load SpriteFrame 画像をresourcesから読み込む
+        var node_a = new cc.Node("pict_a");
+        var node_b = new cc.Node("pict_b");
+        var node_c = new cc.Node("pict_c");
+        var nodes = [node_a, node_b, node_c];
+        var image_a = cc.url.raw("http://www.wanpug.com/illust/illust1617.png");
+        var image_b = cc.url.raw("resources/b.png");
+        var image_c = cc.url.raw("resources/c.png");
+        var images = [image_a, image_b, image_c];
+        var textures = [];
+        this.sprites = [];
+        for(var i = 0; i < 3; i++){
+            this.sprites[i] = nodes[i].addComponent(cc.Sprite);
+            nodes[i].parent = this.canvas;
+            textures[i] = cc.textureCache.addImage(images[i]);
+            this.sprites[i].spriteFrame = new cc.SpriteFrame(textures[i]);
+            cc.log(this.sprites[i].spriteFrame);
+            this.sprites[i].addComponent(character);
+        }
+        
+        /////////////////////////////////////////////
+        
         this.charaTimer = 0;
         this.textTimer = 0;
         this.showCharaFin = false;
@@ -28,8 +52,15 @@ cc.Class({
 
         this.talkText.string = "";
         this.tmp = "";
-        var self = this;
 
+        var self = this;
+        
+        // 各プレハブ（各キャラクタ）を配列に格納
+        //this.characters = [this.character1, this.character2, this.character3];
+        this.characters = [this.sprites[0], this.sprites[1], this.sprites[2]];
+        cc.log(this.characters);
+
+        var self = this;
         // JSONファイル読み込み
         var url = cc.url.raw("resources/dataJson.json");
         cc.loader.load(url, function(error, result) { // JSONファイルからデータを読み込む
@@ -45,30 +76,11 @@ cc.Class({
             self.character_on = true;
             self.scenarioRunning = true;
 
-            // キャラとノードの配列を得る
+            // キャラをノードにセット
             self.ary_chara_and_node = self.getNowCharacterAndNode();
-
-            // jsonファイル読み込み完了フラグを立てる。
-            self.finish_load_json = true;
         });
         // タッチイベント初期化
         this.setTouchEvent();
-    },
-
-    // 画像ロード、Canvasにぶら下げ、characte.js付与
-    imageLoaded: function(texture) {
-        var new_node = new cc.Node()
-        var sprite = new_node.addComponent(cc.Sprite);
-        sprite.spriteFrame = new cc.SpriteFrame(texture);
-        sprite.addComponent(character);
-        new_node.parent = this.canvas;
-        cc.log(sprite);
-        sprite.trim = false;
-        sprite.node.active = false;
-        // 全画像ロード完了なら、フラグを立てる。
-        if(this.canvas.children[this.dataJson.character.length - 1]){
-            this.finish_load_character = true;
-        }
     },
 
     // タッチイベントの登録
@@ -81,11 +93,9 @@ cc.Class({
             onTouchBegan: function(touch, event){
                 // ストーリーを全部表示し終わったなら、returnする
                 if(self.now_story_no == self.total_story_num){ return; }
-
                 // タイマーリセット
                 self.charaTimer = 0;
                 self.textTimer = 0;
-
                 // 全ストーリー数、全シナリオ数、全トーク数を得る
                 self.total_story_num = self.dataJson.story.length;
                 self.total_scenario_num = self.dataJson.story[self.now_story_no].scenario.length;
@@ -132,11 +142,6 @@ cc.Class({
                     self.talkText.string = "";
                     self.tmp = "";
 
-                    // キャラクターを非表示にする
-                    for(var i = 0; i < self.characters.length; i++){
-                        self.characters[i].active = false;
-                    }
-
                     self.showCharaFin = false;
                     self.showTextFin = false;
                     self.scenarioRunning = true;
@@ -152,29 +157,8 @@ cc.Class({
 
     // called every frame, uncomment this function to activate update callback
     update: function (dt) {
-        //////////////////////////////////////////////////////////////////////
         // ロードが未完了なら何もしない
         if(this.dataJson === undefined) { return; }
-        // jsonを読み込んだなら、１度だけ外部画像を取り込む
-        if(this.finish_load_json){
-            this.finish_load_json = false; // １度しか入ってこれないように
-            for(var i = 0; i < this.dataJson.character.length; i++){
-                var url = this.dataJson.character[i].url;
-                cc.textureCache.addImageAsync(url, this.imageLoaded, this)
-            }
-        }
-        // 外部画像を取り込めていないならreturn
-        if(this.canvas.children[this.dataJson.character.length - 1] === undefined) { return; }
-        // キャラクターの読み込みが完了したら、１度だけcharacters配列に格納する
-        if(this.finish_load_character){
-            this.finish_load_character = false;
-            this.characters = [];
-            for(var i = 0; i < this.dataJson.character.length; i++){
-                this.characters[i] = this.canvas.children[i];
-            }
-        }
-        //////////////////////////////////////////////////////////////////////
-
 
         if(this.scenarioRunning){
             // キャラクタがアクティブかつ、キャラクタ表示未完了ならば
@@ -184,10 +168,8 @@ cc.Class({
                     this.showCharaFin = true;
                 }
                 
-                // キャラクタをノードに配置する
-                if(this.charaTimer == 0){///////////    
-                    this.setCharacterToNode(this.ary_chara_and_node[this.now_scenario_no][0], this.ary_chara_and_node[this.now_scenario_no][1]);
-                }////////////
+                // キャラクタを表示する
+                this.setCharacterToNode(this.ary_chara_and_node[this.now_scenario_no][0], this.ary_chara_and_node[this.now_scenario_no][1]);
                 this.now_character = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].character;
                 this.characters[this.now_character - 1].active = true;
                 this.characters[this.now_character - 1].opacity = 100 + (255-100) * this.charaTimer;
@@ -220,7 +202,6 @@ cc.Class({
                             this.now_story_no++;
                         }
                     }
-
                     this.showTextFin = true;
                     this.showCharaFin = false;
                 }
@@ -238,7 +219,6 @@ cc.Class({
             }
         }
     },
-
     writeText: function(){
         /*
         storyが先に進まない限りは２人の会話は上下につづけて表示する
@@ -283,15 +263,15 @@ cc.Class({
     setCharacterToNode: function(chara_no, node_no){
         switch(node_no){
             case 1:
-                this.characters[chara_no - 1].x = -350; break;
+                this.characters[chara_no - 1].x = -300; break;
             case 2:
                 this.characters[chara_no - 1].x = 0; break;
             case 3:
-                this.characters[chara_no - 1].x = 350; break;
+                this.characters[chara_no - 1].x = 300; break;
             case 4:
-                this.characters[chara_no - 1].x = -250; break;
+                this.characters[chara_no - 1].x = -150; break;
             case 5:
-                this.characters[chara_no - 1].x = 250; break;
+                this.characters[chara_no - 1].x = 150; break;
             default:
                 return;
         }

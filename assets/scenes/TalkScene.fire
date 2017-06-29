@@ -221,15 +221,6 @@
     "_enabled": true,
     "talkText": {
       "__id__": 7
-    },
-    "chara1": {
-      "__uuid__": "ba444eb4-0051-4004-bba0-e1f24fc9834c"
-    },
-    "chara2": {
-      "__uuid__": "b41dc300-224e-496f-9733-70c45ed3c0e8"
-    },
-    "chara3": {
-      "__uuid__": "e87942ed-79d4-4096-9267-3eee63384202"
     }
   },
   {
