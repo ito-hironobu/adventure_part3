@@ -147,9 +147,9 @@ cc.Class({
                     self.tmp = "";
 
                     // キャラクターを非表示にする
-                    for(var i = 0; i < self.characters.length; i++){
-                        self.characters[i].active = false;
-                    }
+                    for(var i = 0; i < self.dataJson.character.length; i++){
+                        self.characters[self.characters_no_ary[i] - 1].active = false;
+                    }/////////////////////
 
                     self.showCharaFin = false;
                     self.showTextFin = false;
@@ -187,8 +187,10 @@ cc.Class({
         if(this.finish_load_character){
             this.finish_load_character = false;
             this.characters = [];
+            this.characters_no_ary = [];
             for(var i = 0; i < this.dataJson.character.length; i++){
                 this.characters[this.dataJson.character[i].no - 1] = this.canvas.children[i];
+                this.characters_no_ary[i] = this.dataJson.character[i].no;
             }
         }
         //////////////////////////////////////////////////////////////////////
