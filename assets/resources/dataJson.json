@@ -1,11 +1,11 @@
 {
     "character": [
         {
-            "no": 1,
+            "no": 2,
             "url": "http://4.bp.blogspot.com/-SnwWxvMkiys/WR_LGzvtlAI/AAAAAAABEdk/8tusbBW1b40YgVvbSIT5I1hJhxVVHJzfACLcB/s800/rakugoka_kamigata.png"
         },
         {
-            "no": 2,
+            "no": 1,
             "url": "http://1.bp.blogspot.com/-aQ5-UYqPI8Q/WR_Kyh-yt2I/AAAAAAABEZw/C_iT2yRTKl0eWJIY2Y5cbL4pHy62UvDCgCLcB/s800/job_spy_woman.png"
         },
         {
@@ -20,7 +20,7 @@
             "scenario": [
                 {
                     "scenario_no": 1,
-                    "character": 1,
+                    "character_no": 1,
                     "node_no": 2,
                     "talk": [
                         "作業員：社長！おはようございます！！"
@@ -28,7 +28,7 @@
                 },
                 {
                     "scenario_no": 2,
-                    "character": 3,
+                    "character_no": 3,
                     "node_no": 1,
                     "talk": [
                         "社長：おお、ご苦労さん。精がでるねぇ。ところで君、名前は？"
@@ -36,21 +36,20 @@
                 },
                 {
                     "scenario_no": 3,
-                    "character": 2,
+                    "character_no": 2,
                     "node_no": 3,
                     "talk": [
                         "おやすみでござんす。"
                     ]
                 }
             ]
-            
         },
         {
             "story_no": 2,
             "scenario": [
                 {
                     "scenario_no": 1,
-                    "character": 1,
+                    "character_no": 1,
                     "node_no": 4,
                     "talk": [
                         "作業員：群馬の山奥でございます！！"
@@ -58,21 +57,20 @@
                 },
                 {
                     "scenario_no": 2,
-                    "character": 3,
+                    "character_no": 3,
                     "node_no": 5,
                     "talk": [
                         "社長：ほぉ、群馬の山奥ねぇ。草津温泉かね？"
                     ]
                 }
             ]
-            
         },
         {
             "story_no": 3,
             "scenario": [
                 {
                     "scenario_no": 1,
-                    "character": 1,
+                    "character_no": 1,
                     "node_no": 4,
                     "talk": [
                         "作業員：いえっ！もっともっと奥でございます！"
@@ -80,21 +78,20 @@
                 },
                 {
                     "scenario_no": 2,
-                    "character": 3,
+                    "character_no": 3,
                     "node_no": 5,
                     "talk": [
                         "社長：あっそ"
                     ]
                 }
             ]
-            
         },
         {
             "story_no": 4,
             "scenario": [
                 {
                     "scenario_no": 1,
-                    "character": 2,
+                    "character_no": 2,
                     "node_no": 2,
                     "talk": [
                         "腰巾着１：社長、お車の用意ができましたので、ささ、どうぞこちらへ",
@@ -102,14 +99,13 @@
                     ]
                 }
             ]
-            
         },
         {
             "story_no": 5,
             "scenario": [
                 {
                     "scenario_no": 1,
-                    "character": 3,
+                    "character_no": 3,
                     "node_no": 4,
                     "talk": [
                         "おやすみなさい　でござる。"
@@ -117,7 +113,7 @@
                 },
                 {
                     "scenario_no": 2,
-                    "character": 2,
+                    "character_no": 2,
                     "node_no": 5,
                     "talk": [
                         "おやすみでござんす。"

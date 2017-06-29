@@ -70,7 +70,7 @@ cc.Class({
         }
     },
     loadImgFromRes: function(url){
-        var new_node = new cc.Node();		
+        var new_node = new cc.Node();
         var sprite = new_node.addComponent(cc.Sprite);		
         var image = cc.url.raw(url);
         var texture = cc.textureCache.addImage(image);
@@ -117,7 +117,7 @@ cc.Class({
                     }
 
                     for(var i = 0; i < self.total_scenario_num; i++){
-                        self.now_character = self.dataJson.story[self.now_story_no].scenario[i].character;
+                        self.now_character = self.dataJson.story[self.now_story_no].scenario[i].character_no;
                         self.characters[self.now_character - 1].active = true;
                         self.characters[self.now_character - 1].opacity = 255
                     }
@@ -188,7 +188,7 @@ cc.Class({
             this.finish_load_character = false;
             this.characters = [];
             for(var i = 0; i < this.dataJson.character.length; i++){
-                this.characters[i] = this.canvas.children[i];
+                this.characters[this.dataJson.character[i].no - 1] = this.canvas.children[i];
             }
         }
         //////////////////////////////////////////////////////////////////////
@@ -206,7 +206,7 @@ cc.Class({
                 if(this.charaTimer == 0){///////////    
                     this.setCharacterToNode(this.ary_chara_and_node[this.now_scenario_no][0], this.ary_chara_and_node[this.now_scenario_no][1]);
                 }////////////
-                this.now_character = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].character;
+                this.now_character = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].character_no;
                 this.characters[this.now_character - 1].active = true;
                 this.characters[this.now_character - 1].opacity = 100 + (255-100) * this.charaTimer;
                 if(this.charaTimer == 1){
@@ -290,7 +290,7 @@ cc.Class({
         var ary_chara_and_node = [];
         for(var i = 0; i < this.dataJson.story[this.now_story_no].scenario.length; i++){
             var tmp = [
-                this.dataJson.story[this.now_story_no].scenario[i].character,
+                this.dataJson.story[this.now_story_no].scenario[i].character_no,
                 this.dataJson.story[this.now_story_no].scenario[i].node_no
             ];
             ary_chara_and_node.push(tmp);
