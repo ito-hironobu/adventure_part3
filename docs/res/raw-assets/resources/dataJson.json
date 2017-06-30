@@ -2,93 +2,82 @@
     "character": [
         {
             "no": 1,
-            "url": "http://2.bp.blogspot.com/-CEOz_Tbpv_U/U0pTF7yr3tI/AAAAAAAAfDk/YgeAULZxj_4/s800/yakuza.png"
-        },
-        {
-            "no": 4,
-            "url": "http://1.bp.blogspot.com/-7d0Ty0HTICI/V4SA6emmiwI/AAAAAAAA8N4/JNfzdM6_MdcXmQm3TOv8paAJLjLPP-NoQCLcB/s800/character_gorilla_hardboiled.png"
+            "url": "resources/チンパンジー.png"
         },
         {
             "no": 2,
-            "url": "http://4.bp.blogspot.com/--SnAo60pxUA/VSufPr3wArI/AAAAAAAAs4k/JOJWuKzDJRM/s800/job_spy.png"
+            "url": "resources/林先生.png"
+        },
+        {
+            "no": 3,
+            "url": "resources/川越シェフ.png"
+        },
+        {
+            "no": 4,
+            "url": "resources/やらないか.png"
+        },
+        {
+            "no": 5,
+            "url": "resources/マスオさん.png"
+        },
+        {
+            "no": 6,
+            "url": "resources/政治家.png"
         }
     ],
 
     "story": [
         {
-            "story_no": 1,
             "scenario": [
                 {
                     "character_no": 1,
-                    "node_no": 2,
                     "talk": [
-                        "作業員A：社長！おはようございます！！"
-                    ]
+                        "キャラ１：ここにセリフが入ります。"
+                    ],
+                    "node_no": 3
                 },
                 {
-                    "character_no": 4,
-                    "node_no": 1,
+                    "character_no": 6,
                     "talk": [
-                        "社長：おお、ご苦労さん。精がでるねぇ。ところで君、名前は？"
-                    ]
+                        "キャラ３：ここにセリフが入ります。"
+                    ],
+                    "node_no": 1
                 },
                 {
-                    "character_no": 2,
-                    "node_no": 3,
+                    "character_no": 3,
                     "talk": [
-                        "作業員B：お疲れ様でした。"
-                    ]
+                        "キャラ２：ここにセリフが入ります。"
+                    ],
+                    "node_no": 2
                 }
             ]
         },
         {
-            "story_no": 2,
             "scenario": [
                 {
-                    "character_no": 1,
-                    "node_no": 4,
+                    "character_no": 4,
                     "talk": [
-                        "作業員：群馬の山奥でございます！！"
-                    ]
+                        "キャラ４：ここにセリフが入ります。"
+                    ],
+                    "node_no": 4
                 },
                 {
-                    "character_no": 4,
-                    "node_no": 5,
+                    "character_no": 5,
                     "talk": [
-                        "社長：ほぉ、群馬の山奥ねぇ。草津温泉かね？"
-                    ]
+                        "キャラ５：ここにセリフが入ります。"
+                    ],
+                    "node_no": 5
                 }
             ]
         },
         {
-            "story_no": 3,
-            "scenario": [
-                {
-                    "character_no": 1,
-                    "node_no": 4,
-                    "talk": [
-                        "作業員：いえっ！もっともっと奥でございます！"
-                    ]
-                },
-                {
-                    "character_no": 4,
-                    "node_no": 5,
-                    "talk": [
-                        "社長：あっそ"
-                    ]
-                }
-            ]
-        },
-        {
-            "story_no": 4,
             "scenario": [
                 {
                     "character_no": 2,
-                    "node_no": 2,
                     "talk": [
-                        "腰巾着１：社長、お車の用意ができましたので、ささ、どうぞこちらへ",
-                        "腰巾着１：お足元にお気を付けあそばせ"
-                    ]
+                        "キャラ２：ここにセリフが入ります。"
+                    ],
+                    "node_no": 2
                 }
             ]
         }
