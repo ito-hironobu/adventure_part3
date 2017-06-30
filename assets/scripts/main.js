@@ -70,6 +70,13 @@ cc.Class({
         new_node.parent = this.canvas;
         sprite.trim = false;
         sprite.node.active = false;
+        cc.log(sprite);
+        // 画像縦幅を500まで拡大縮小する
+        var tmp_height = sprite.node.height;
+        sprite.node.height = 600;
+        sprite.node.width *= sprite.node.height/tmp_height;
+        sprite.node.y = -50;
+
         // 全画像ロード完了なら、フラグを立てる。
         if(this.canvas.children[this.dataJson.character.length - 1]){
             this.finish_load_character = true;
@@ -91,6 +98,12 @@ cc.Class({
         new_node.parent = this.canvas;
         sprite.trim = false;
         sprite.node.active = false;
+        // 画像縦幅を500まで縮小する
+        var tmp_height = sprite.node.height;
+        sprite.node.height = 500;
+        sprite.node.width *= sprite.node.height/tmp_height;
+        sprite.node.y = -50;
+
         // 全画像ロード完了なら、フラグを立てる。
         if(this.canvas.children[this.dataJson.character.length - 1]){
             this.finish_load_character = true;
