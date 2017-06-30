@@ -71,10 +71,10 @@ cc.Class({
         sprite.trim = false;
         sprite.node.active = false;
         // 画像縦幅を500まで拡大縮小する
-        var tmp_height = sprite.node.height;
-        sprite.node.height = 600;
-        sprite.node.width *= sprite.node.height/tmp_height;
-        sprite.node.y = -50;
+        var tmp_width = sprite.node.width;
+        sprite.node.width = 330;
+        sprite.node.height *= sprite.node.width/tmp_width;
+        sprite.node.y = 50;
 
         // 全画像ロード完了なら、フラグを立てる。
         if(this.canvas.children[this.dataJson.character.length - 1]){
@@ -98,11 +98,11 @@ cc.Class({
         new_node.parent = this.canvas;
         sprite.trim = false;
         sprite.node.active = false;
-        // 画像縦幅を500まで縮小する
-        var tmp_height = sprite.node.height;
-        sprite.node.height = 500;
-        sprite.node.width *= sprite.node.height/tmp_height;
-        sprite.node.y = -50;
+        // 画像縦幅を500まで拡大縮小する
+        var tmp_width = sprite.node.width;
+        sprite.node.width = 330;
+        sprite.node.height *= sprite.node.width/tmp_width;
+        sprite.node.y = 50;
 
         // 全画像ロード完了なら、フラグを立てる。
         if(this.canvas.children[this.dataJson.character.length - 1]){
@@ -129,10 +129,10 @@ cc.Class({
                     return;
                 }
 
-                // 全ストーリー数、全シナリオ数、全トーク数を得る
+                // 全ストーリー数、全シナリオ数を得る
                 self.total_story_num = self.dataJson.story.length;
                 self.total_scenario_num = self.dataJson.story[self.now_story_no].scenario.length;
-                self.total_talk_num = self.dataJson.story[self.now_story_no].scenario[self.now_scenario_no].talk.length;
+                
 
                 // シナリオが走っているなら、現在のシナリオを完了させる。
                 if(self.scenarioRunning == true){
@@ -239,6 +239,8 @@ cc.Class({
                 // キャラクタをノードに配置する
                 if(this.charaTimer == 0){///////////    
                     this.setCharacterToNode(this.ary_chara_and_node[this.now_scenario_no][0], this.ary_chara_and_node[this.now_scenario_no][1]);
+                    //
+                    this.total_talk_num = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk.length;
                 }////////////
                 this.now_character = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].character_no;
                 this.characters[this.now_character - 1].active = true;
@@ -259,7 +261,7 @@ cc.Class({
                 var scenario = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk[this.now_talk_no];
                 var str_ary = scenario.split('');
                 var show_text_ary = [];
-                var show_len = Math.floor(this.textTimer / 0.2);
+                var show_len = Math.floor(this.textTimer / 0.15);
                 if(show_len == str_ary.length){
                     // トークを次に進める
                     this.now_talk_no++;
@@ -306,7 +308,7 @@ cc.Class({
         var scenario = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk[this.now_talk_no];
         var str_ary = scenario.split('');
         var show_text_ary = [];
-        var show_len = Math.floor(this.textTimer / 0.2);
+        var show_len = Math.floor(this.textTimer / 0.15);
         for(var i = 0; i < show_len; i++){
             show_text_ary.push(str_ary[i]);
         }

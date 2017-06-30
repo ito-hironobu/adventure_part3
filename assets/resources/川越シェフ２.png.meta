@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "a647643a-b144-4680-8ea0-0119bfbe95b0",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "川越シェフ２": {
+      "ver": "1.0.3",
+      "uuid": "79df4db1-d48d-4a78-b4ab-f5aacaa52041",
+      "rawTextureUuid": "a647643a-b144-4680-8ea0-0119bfbe95b0",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 650,
+      "height": 486,
+      "rawWidth": 650,
+      "rawHeight": 486,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
