@@ -56,17 +56,22 @@ cc.Class({
     },
 
     // 画像ロード、Canvasにぶら下げ、characte.js付与
-    loadImgFromUrl: function(url) {
+    loadImgFromUrl: function(texture) {
         var new_node = new cc.Node()
         var sprite = new_node.addComponent(cc.Sprite);
-        sprite.spriteFrame = new cc.SpriteFrame(url);
+        sprite.spriteFrame = new cc.SpriteFrame(texture);
+        for(var i = 0; i < this.dataJson.character.length; i++){
+            if(this.dataJson.character[i].url == texture.url){
+                sprite.c_no = this.dataJson.character[i].no;
+                break;
+            }
+        }
         sprite.addComponent(character);
         new_node.parent = this.canvas;
         sprite.trim = false;
         sprite.node.active = false;
         // 全画像ロード完了なら、フラグを立てる。
         if(this.canvas.children[this.dataJson.character.length - 1]){
-            cc.log('url');
             this.finish_load_character = true;
         }
     },
@@ -76,6 +81,12 @@ cc.Class({
         var image = cc.url.raw(url);
         var texture = cc.textureCache.addImage(image);
         sprite.spriteFrame = new cc.SpriteFrame(texture);
+        for(var i = 0; i < this.dataJson.character.length; i++){
+            if(this.dataJson.character[i].url == url){
+                sprite.c_no = this.dataJson.character[i].no;
+                break;
+            }
+        }
         sprite.addComponent(character);
         new_node.parent = this.canvas;
         sprite.trim = false;
@@ -83,7 +94,6 @@ cc.Class({
         // 全画像ロード完了なら、フラグを立てる。
         if(this.canvas.children[this.dataJson.character.length - 1]){
             this.finish_load_character = true;
-            cc.log('url');
         }
     },
 
@@ -184,7 +194,8 @@ cc.Class({
                 if(url.substr(0, 10) == "resources/"){
                     this.loadImgFromRes(url);
                 }else{
-                    cc.textureCache.addImageAsync(url, this.loadImgFromUrl, this);
+                    var texture = url;
+                    cc.textureCache.addImageAsync(texture, this.loadImgFromUrl, this);
                 }
             }
         }
@@ -195,16 +206,11 @@ cc.Class({
             this.finish_load_character = false;
             this.characters = [];
             this.characters_no_ary = [];
+            // 各キャラのspriteを、characters配列内に（キャラ番号−１）＝インデックス番号　となるように格納
             for(var i = 0; i < this.dataJson.character.length; i++){
-                this.characters[this.dataJson.character[i].no - 1] = this.canvas.children[i];
-                this.characters_no_ary[i] = this.dataJson.character[i].no;
+                this.characters[this.canvas.children[i].getComponent(cc.Sprite).c_no - 1] = this.canvas.children[i];
+                this.characters_no_ary[i] = this.canvas.children[i].getComponent(cc.Sprite).c_no;
             }
-            for(var i = 0; i <= this.dataJson.character.length; i++){
-                cc.log(this.characters[i]);
-            }
-            cc.log(this.canvas.children[0]);
-            cc.log(this.canvas.children[1]);
-            cc.log(this.canvas.children[2]);
         }
         //////////////////////////////////////////////////////////////////////
 
