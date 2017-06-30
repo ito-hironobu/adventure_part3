@@ -70,7 +70,6 @@ cc.Class({
         new_node.parent = this.canvas;
         sprite.trim = false;
         sprite.node.active = false;
-        cc.log(sprite);
         // 画像縦幅を500まで拡大縮小する
         var tmp_height = sprite.node.height;
         sprite.node.height = 600;
@@ -82,6 +81,7 @@ cc.Class({
             this.finish_load_character = true;
         }
     },
+    // 画像をresources内から読み込む
     loadImgFromRes: function(url){
         var new_node = new cc.Node();
         var sprite = new_node.addComponent(cc.Sprite);		
