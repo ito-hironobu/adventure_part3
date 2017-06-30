@@ -66,6 +66,7 @@ cc.Class({
         sprite.node.active = false;
         // 全画像ロード完了なら、フラグを立てる。
         if(this.canvas.children[this.dataJson.character.length - 1]){
+            cc.log('url');
             this.finish_load_character = true;
         }
     },
@@ -82,6 +83,7 @@ cc.Class({
         // 全画像ロード完了なら、フラグを立てる。
         if(this.canvas.children[this.dataJson.character.length - 1]){
             this.finish_load_character = true;
+            cc.log('url');
         }
     },
 
@@ -93,12 +95,16 @@ cc.Class({
             swallowTouch: true,
             // クリック時の動作を登録
             onTouchBegan: function(touch, event){
-                // ストーリーを全部表示し終わったなら、returnする
-                if(self.now_story_no == self.total_story_num){ return; }
-
                 // タイマーリセット
                 self.charaTimer = 0;
                 self.textTimer = 0;
+
+                // ストーリーを全部表示し終わったなら、returnする
+                if(self.now_story_no == self.total_story_num){
+                    cc.find('clickIcon').active = false; // クリックアニメーション停止
+                    self.talkText.string = "";
+                    return;
+                }
 
                 // 全ストーリー数、全シナリオ数、全トーク数を得る
                 self.total_story_num = self.dataJson.story.length;
@@ -171,13 +177,14 @@ cc.Class({
         if(this.dataJson === undefined) { return; }
         // jsonを読み込んだなら、１度だけ外部画像を取り込む
         if(this.finish_load_json){
-            this.finish_load_json = false; // １度しか入ってこれないように
+            this.finish_load_json = false; // １度しか入ってこれないようにここでfalse
+            // キャラクタ画像をロードする
             for(var i = 0; i < this.dataJson.character.length; i++){
                 var url = this.dataJson.character[i].url;
                 if(url.substr(0, 10) == "resources/"){
                     this.loadImgFromRes(url);
                 }else{
-                    cc.textureCache.addImageAsync(url, this.loadImgFromUrl, this)
+                    cc.textureCache.addImageAsync(url, this.loadImgFromUrl, this);
                 }
             }
         }
@@ -192,6 +199,12 @@ cc.Class({
                 this.characters[this.dataJson.character[i].no - 1] = this.canvas.children[i];
                 this.characters_no_ary[i] = this.dataJson.character[i].no;
             }
+            for(var i = 0; i <= this.dataJson.character.length; i++){
+                cc.log(this.characters[i]);
+            }
+            cc.log(this.canvas.children[0]);
+            cc.log(this.canvas.children[1]);
+            cc.log(this.canvas.children[2]);
         }
         //////////////////////////////////////////////////////////////////////
 
@@ -273,7 +286,6 @@ cc.Class({
         
         var scenario = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk[this.now_talk_no];
         var str_ary = scenario.split('');
-        cc.log(str_ary);
         var show_text_ary = [];
         var show_len = Math.floor(this.textTimer / 0.2);
         for(var i = 0; i < show_len; i++){

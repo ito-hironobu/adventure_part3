@@ -1,16 +1,16 @@
 {
     "character": [
         {
-            "no": 2,
-            "url": "http://4.bp.blogspot.com/-SnwWxvMkiys/WR_LGzvtlAI/AAAAAAABEdk/8tusbBW1b40YgVvbSIT5I1hJhxVVHJzfACLcB/s800/rakugoka_kamigata.png"
+            "no": 4,
+            "url": "http://2.bp.blogspot.com/-G8QOTZjfuwo/WRaTPLQ65kI/AAAAAAABEPQ/rx9nyAbvcAEMVvszXQBlWZPqCfg8HX_gwCLcB/s800/job_suiboudan_donou.png"
         },
         {
             "no": 1,
-            "url": "http://1.bp.blogspot.com/-aQ5-UYqPI8Q/WR_Kyh-yt2I/AAAAAAABEZw/C_iT2yRTKl0eWJIY2Y5cbL4pHy62UvDCgCLcB/s800/job_spy_woman.png"
+            "url": "resources/a.png"
         },
         {
-            "no": 4,
-            "url": "http://2.bp.blogspot.com/-G8QOTZjfuwo/WRaTPLQ65kI/AAAAAAABEPQ/rx9nyAbvcAEMVvszXQBlWZPqCfg8HX_gwCLcB/s800/job_suiboudan_donou.png"
+            "no": 2,
+            "url": "http://1.bp.blogspot.com/-aQ5-UYqPI8Q/WR_Kyh-yt2I/AAAAAAABEZw/C_iT2yRTKl0eWJIY2Y5cbL4pHy62UvDCgCLcB/s800/job_spy_woman.png"
         }
     ],
 
@@ -19,7 +19,6 @@
             "story_no": 1,
             "scenario": [
                 {
-                    "scenario_no": 1,
                     "character_no": 1,
                     "node_no": 2,
                     "talk": [
@@ -27,7 +26,6 @@
                     ]
                 },
                 {
-                    "scenario_no": 2,
                     "character_no": 4,
                     "node_no": 1,
                     "talk": [
@@ -35,7 +33,6 @@
                     ]
                 },
                 {
-                    "scenario_no": 3,
                     "character_no": 2,
                     "node_no": 3,
                     "talk": [
@@ -48,7 +45,6 @@
             "story_no": 2,
             "scenario": [
                 {
-                    "scenario_no": 1,
                     "character_no": 1,
                     "node_no": 4,
                     "talk": [
@@ -56,7 +52,6 @@
                     ]
                 },
                 {
-                    "scenario_no": 2,
                     "character_no": 4,
                     "node_no": 5,
                     "talk": [
@@ -69,7 +64,6 @@
             "story_no": 3,
             "scenario": [
                 {
-                    "scenario_no": 1,
                     "character_no": 1,
                     "node_no": 4,
                     "talk": [
@@ -77,7 +71,6 @@
                     ]
                 },
                 {
-                    "scenario_no": 2,
                     "character_no": 4,
                     "node_no": 5,
                     "talk": [
@@ -90,7 +83,6 @@
             "story_no": 4,
             "scenario": [
                 {
-                    "scenario_no": 1,
                     "character_no": 2,
                     "node_no": 2,
                     "talk": [
@@ -104,7 +96,6 @@
             "story_no": 5,
             "scenario": [
                 {
-                    "scenario_no": 1,
                     "character_no": 4,
                     "node_no": 4,
                     "talk": [
@@ -112,7 +103,6 @@
                     ]
                 },
                 {
-                    "scenario_no": 2,
                     "character_no": 2,
                     "node_no": 5,
                     "talk": [

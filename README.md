@@ -18,8 +18,7 @@ https://ito-hironobu.github.io/adventure_part3/
 
 ## 使用方法
 
-ここにインストール方法（Cocos からのインストールが望ましい）を記載してください\n
-github
+ここにインストール方法（Cocos からのインストールが望ましい）を記載してください
 
 ## インストール
 
