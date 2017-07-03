@@ -14,8 +14,7 @@ https://ito-hironobu.github.io/adventure_part3/
 
 ## 動作環境
 
-ここに動作、開発に必要な環境を記載してください  
-ooo
+ここに動作、開発に必要な環境を記載してください
 
 ## 使用方法
 
