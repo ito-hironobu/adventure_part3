@@ -14,11 +14,11 @@ https://ito-hironobu.github.io/adventure_part3/
 
 ## 動作環境
 
-[cocos2d-js](http://www.cocos2d-x.org/download)
+cocos2d-x ver.3.8.0 以上
 
 ## 使用方法
 
-assets/resources/dataJson.jsonファイル内を書き換えて使用します。
+githubからクローンしたassets/resources/dataJson.jsonファイル内を書き換えて使用します。
 
 | character | キャラの定義です |
 | --- | --- |
@@ -32,10 +32,9 @@ assets/resources/dataJson.jsonファイル内を書き換えて使用します�
 | talk | キャラクターの話す内容を記述してください。 |
 | node_no | ブラウザ上のどの位置にキャラクターを表示させるかを指定します。ブラウザ上には、( 1 4 2 5 3 )のように番号が振ってあるので、表示させたい位置の番号を指定してください。 |
 
-ここにインストール方法（Cocos からのインストールが望ましい）を記載してください
-
 ## インストール
 
+cocos2d-x　→　[cocos2d-js](http://www.cocos2d-x.org/download)  
 git clone git@github.com:ito-hironobu/adventure_part3.git
 
 ## コントリビューション
