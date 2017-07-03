@@ -309,7 +309,6 @@ cc.Class({
             this.count_for_tmp++;
         }
         this.talkText.string = "";
-        cc.log(this.tmp);
         var scenario = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk[this.now_talk_no];
         var str_ary = scenario.split('');
         var show_text_ary = [];
