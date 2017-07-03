@@ -18,7 +18,8 @@ https://ito-hironobu.github.io/adventure_part3/
 
 ## 使用方法
 
-ここにインストール方法（Cocos からのインストールが望ましい）を記載してください  
+ここにインストール方法（Cocos からのインストールが望ましい）を記載してください
+
 | character | キャラの定義です |
 | --- | --- |
 | no | story内のcharacter_noで使用するキャラ番号を設定します。 |
