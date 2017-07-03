@@ -99,14 +99,11 @@ cc.Class({
         new_node.parent = this.canvas;
         sprite.trim = false;
         sprite.node.active = false;
-        cc.log(sprite.node.width);
         // 画像縦幅を500まで拡大縮小する
         var tmp_width = sprite.node.width;
         sprite.node.width = 330;
         sprite.node.height *= sprite.node.width/tmp_width;
         sprite.node.y = 50;
-        cc.log(sprite.node.width);
-        cc.log(sprite.node);
 
         // 全画像ロード完了なら、フラグを立てる。
         if(this.canvas.children[this.dataJson.character.length - 1]){
