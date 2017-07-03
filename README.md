@@ -20,6 +20,8 @@ https://ito-hironobu.github.io/adventure_part3/
 
 ここにインストール方法（Cocos からのインストールが望ましい）を記載してください
 
+assets/resources/dataJson.jsonファイル内を書き換えて使用します。
+
 | character | キャラの定義です |
 | --- | --- |
 | no | story内のcharacter_noで使用するキャラ番号を設定します。 |
