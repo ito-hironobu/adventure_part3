@@ -26,7 +26,6 @@ assets/resources/dataJson.jsonファイル内を書き換えて使用します�
 | --- | --- |
 | no | story内のcharacter_noで使用するキャラ番号を設定します。 |
 | url | 読み込む画像を指定します。ネット上の画像ならそのurlを"http://.../abc.png"のように指定します。assets/resourcesフォルダ内の画像なら"resources/abc.png"のように指定します。 |
-
 | story | ストーリー内容の指定です |
 | --- | --- |
 | scenario |  |
