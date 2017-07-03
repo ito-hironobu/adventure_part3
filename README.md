@@ -18,7 +18,7 @@ cocos2d-x ver.3.8.0 以上
 
 ## 使用方法
 
-githubからクローンしたassets/resources/dataJson.jsonファイル内を書き換えて使用します。
+githubからクローンしたassets/resources/dataJson.jsonファイル内を書き換えて動かしてください。
 
 | character | キャラの定義です |
 | --- | --- |
@@ -34,8 +34,8 @@ githubからクローンしたassets/resources/dataJson.jsonファイル内を�
 
 ## インストール
 
-cocos2d-x　→　[cocos2d-js](http://www.cocos2d-x.org/download)  
-git clone git@github.com:ito-hironobu/adventure_part3.git
+[cocos2d-x](http://www.cocos2d-x.org/download)  
+クローン　→　git clone git@github.com:ito-hironobu/adventure_part3.git
 
 ## コントリビューション
 
