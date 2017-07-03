@@ -271,10 +271,10 @@ cc.Class({
                 if(show_len == str_ary.length){
                     // トークを次に進める
                     this.now_talk_no++;
+                    this.count_for_tmp = 0;
                     if(this.now_talk_no == this.total_talk_num){
                         this.now_talk_no = 0;
                         this.now_scenario_no++;
-                        this.count_for_tmp = 0;///////////////////////////////////
                         if(this.now_scenario_no == this.total_scenario_num){
                             this.now_scenario_no = 0;
                             this.now_story_no++;
@@ -291,7 +291,6 @@ cc.Class({
                     this.character_on = false;
                     // クリックアイコンのアニメーション再生
                     cc.find('clickIcon').active = true;
-                    //this.clickAnim = this.node
                 }
                 this.textTimer += dt;
                 this.charaTimer = this.initial_time;
@@ -310,7 +309,7 @@ cc.Class({
             this.count_for_tmp++;
         }
         this.talkText.string = "";
-        
+        cc.log(this.tmp);
         var scenario = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk[this.now_talk_no];
         var str_ary = scenario.split('');
         var show_text_ary = [];
