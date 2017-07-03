@@ -14,7 +14,8 @@ cc.Class({
     onLoad: function () {
         this.canvas = cc.find('Canvas');
 
-        this.charaTimer = 0;
+        this.initial_time = -0.5
+        this.charaTimer = this.initial_time;
         this.textTimer = 0;
         this.showCharaFin = false;
         this.showTextFin = false;
@@ -98,11 +99,14 @@ cc.Class({
         new_node.parent = this.canvas;
         sprite.trim = false;
         sprite.node.active = false;
+        cc.log(sprite.node.width);
         // 画像縦幅を500まで拡大縮小する
         var tmp_width = sprite.node.width;
         sprite.node.width = 330;
         sprite.node.height *= sprite.node.width/tmp_width;
         sprite.node.y = 50;
+        cc.log(sprite.node.width);
+        cc.log(sprite.node);
 
         // 全画像ロード完了なら、フラグを立てる。
         if(this.canvas.children[this.dataJson.character.length - 1]){
@@ -119,7 +123,7 @@ cc.Class({
             // クリック時の動作を登録
             onTouchBegan: function(touch, event){
                 // タイマーリセット
-                self.charaTimer = 0;
+                self.charaTimer = self.initial_time;
                 self.textTimer = 0;
 
                 // ストーリーを全部表示し終わったなら、returnする
@@ -237,14 +241,16 @@ cc.Class({
                 }
                 
                 // キャラクタをノードに配置する
-                if(this.charaTimer == 0){///////////    
+                if(this.charaTimer == this.initial_time){///////////    
                     this.setCharacterToNode(this.ary_chara_and_node[this.now_scenario_no][0], this.ary_chara_and_node[this.now_scenario_no][1]);
                     //
                     this.total_talk_num = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk.length;
-                }////////////
+                }
+                if(this.charaTimer >= 0){
                 this.now_character = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].character_no;
                 this.characters[this.now_character - 1].active = true;
                 this.characters[this.now_character - 1].opacity = 100 + (255-100) * this.charaTimer;
+                }
                 if(this.charaTimer == 1){
                     this.characters[this.now_character - 1].getComponent(character).jumpCharacter();
                 }
@@ -288,7 +294,7 @@ cc.Class({
                     //this.clickAnim = this.node
                 }
                 this.textTimer += dt;
-                this.charaTimer = 0;
+                this.charaTimer = this.initial_time;
             }
         }
     },
