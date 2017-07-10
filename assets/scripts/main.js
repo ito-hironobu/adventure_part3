@@ -190,9 +190,9 @@ cc.Class({
     },
 
     update: function (dt) {
+        // 本当はonLoad内で実行したかったが、jsonファイル読み込みを待つ手法がわからずupdate内で実行した... //////////////////
         // jsonロード未完了ならreturn
         if(this.finish_load_json == undefined){ return; }
-        // 本当はonLoad内で実行したかったが、jsonファイル読み込みを待つ手法がわからずupdate内で実行した... //////////////////
         // キャラ画像を読み込みスプライト作成
         if(this.finish_load_json){
             this.finish_load_json = false; // １度しか入ってこれないようにここでfalse
@@ -205,69 +205,52 @@ cc.Class({
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        if(this.scenario_running){
-            // キャラクタがアクティブかつ、キャラクタ表示未完了ならば
-            if(this.character_on && !this.show_chara_fin){
-                if(this.chara_timer >= 1) {
-                    this.chara_timer = 1;
-                    this.show_chara_fin = true;
-                }
-                
-                // キャラクタをノードに配置する
-                if(this.chara_timer == this.initial_time){///////////    
-                    this.setCharacterToNode(this.ary_chara_and_node[this.now_scenario_no][0], this.ary_chara_and_node[this.now_scenario_no][1]);
-                    //
-                    this.total_talk_num = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk.length;
-                }
-                if(this.chara_timer >= 0){
+        // キャラ表示 & キャラアニメーション
+        if(this.character_on && !this.show_chara_fin){ // キャラクタがアクティブかつ、キャラクタ表示未完了ならば
+            // キャラクタをノードに配置する
+            if(this.chara_timer == this.initial_time){
+                this.setCharacterToNode(this.ary_chara_and_node[this.now_scenario_no][0], this.ary_chara_and_node[this.now_scenario_no][1]);
+                this.total_talk_num = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk.length; // 現在のシナリオの全トーク数を得ておく
+                this.show_text_fin = false; // テキスト表示をfalseにしておく
+                this.textTimer = 0;
+            }
+            if(this.chara_timer >= 0){ // キャラを１秒で表示
                 this.now_character = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].character_no;
                 this.characters[this.now_character - 1].active = true;
                 this.characters[this.now_character - 1].opacity = 100 + (255-100) * this.chara_timer;
-                }
-                if(this.chara_timer == 1){
-                    this.characters[this.now_character - 1].getComponent(character).jumpCharacter();
-                }
-
-                this.chara_timer += dt;
-                this.textTimer = 0;
-                this.show_text_fin = false;
             }
 
-            // キャラクタ表示完了かつ、テキスト表示未完了ならば
-            if(this.show_chara_fin && !this.show_text_fin){
-                this.writeText();
-
-                var scenario = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk[this.now_talk_no];
-                var str_ary = scenario.split('');
-                var show_text_ary = [];
-                var show_len = Math.floor(this.textTimer / 0.15);
-                if(show_len == str_ary.length){
-                    // トークを次に進める
-                    this.now_talk_no++;
-                    this.count_for_tmp = 0;
-                    if(this.now_talk_no == this.total_talk_num){
-                        this.now_talk_no = 0;
-                        this.now_scenario_no++;
-                        if(this.now_scenario_no == this.total_scenario_num){
-                            this.now_scenario_no = 0;
-                            this.now_story_no++;
-                        }
-                    }
-
-                    this.show_text_fin = true;
-                    this.show_chara_fin = false;
-                }
-
-                // storyが次に進んだタイミングで一旦停止して、クリックアイコンはスタート
-                if( (this.story_no_onclick + 1) == this.now_story_no ){
-                    this.scenario_running = false;
-                    this.character_on = false;
-                    // クリックアイコンのアニメーション再生
-                    cc.find('clickIcon').active = true;
-                }
-                this.textTimer += dt;
-                this.chara_timer = this.initial_time;
+            this.chara_timer += dt;
+            if(this.chara_timer >= 1) { // １秒経過でキャラが跳ねて表示処理完了
+                this.characters[this.now_character - 1].getComponent(character).jumpCharacter();
+                this.show_chara_fin = true;
             }
+        }
+
+        // キャラクタ表示完了かつ、テキスト表示未完了ならば
+        if(this.show_chara_fin && !this.show_text_fin){
+            var scenario = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk[this.now_talk_no];
+            this.str_ary = scenario.split('');
+            this.show_len = Math.floor(this.textTimer / 0.15);
+            
+            // トーク表示
+            this.writeText();
+
+            // １トーク表示完了で次のトークへ
+            if(this.show_len == this.str_ary.length){
+                this.goNextTalk();
+            }
+
+            // storyが次に進んだタイミングで一旦停止して、クリックアイコンをスタート
+            if( (this.story_no_onclick + 1) == this.now_story_no ){
+                this.scenario_running = false;
+                this.character_on = false;
+                // クリックアイコンのアニメーション再生
+                cc.find('clickIcon').active = true;
+            }
+            
+            this.textTimer += dt;
+            this.chara_timer = this.initial_time;
         }
     },
 
@@ -294,9 +277,7 @@ cc.Class({
     },
 
     writeText: function(){
-        /*
-        storyが先に進まない限りは２人の会話は上下につづけて表示する
-        */
+        // storyが先に進まない限りは２人の会話は上下につづけて表示する
         if(this.story_no_onclick == this.now_story_no && this.count_for_tmp == 0){
             if(this.talkText.string != ""){
                 this.tmp = this.talkText.string;
@@ -304,19 +285,34 @@ cc.Class({
             this.count_for_tmp++;
         }
         this.talkText.string = "";
-        var scenario = this.dataJson.story[this.now_story_no].scenario[this.now_scenario_no].talk[this.now_talk_no];
-        var str_ary = scenario.split('');
+        /////
+        
         var show_text_ary = [];
-        var show_len = Math.floor(this.textTimer / 0.15);
-        for(var i = 0; i < show_len; i++){
-            show_text_ary.push(str_ary[i]);
+        for(var i = 0; i < this.show_len; i++){
+            show_text_ary.push(this.str_ary[i]);
         }
-        if(show_len == str_ary.length){
+        if(this.show_len == this.str_ary.length){
             show_text_ary.push("\n");
         }
-        this.text_tmp = show_text_ary.join("");                                         
-        this.text = this.tmp + this.text_tmp;
-        this.talkText.string = this.text;
+        this.text_tmp = show_text_ary.join("");
+        this.talkText.string = this.tmp + this.text_tmp;
+    },
+    
+    goNextTalk: function(){
+        // トーク表示完了のフラグ
+        this.show_text_fin = true;
+        this.show_chara_fin = false;
+        // トークを次に進める
+        this.now_talk_no++;
+        this.count_for_tmp = 0;
+        if(this.now_talk_no == this.total_talk_num){
+            this.now_talk_no = 0;
+            this.now_scenario_no++;
+            if(this.now_scenario_no == this.total_scenario_num){
+                this.now_scenario_no = 0;
+                this.now_story_no++;
+            }
+        }
     },
 
     // 現在のstoryで登場するキャラクターの順番を配列に入れてreturn
