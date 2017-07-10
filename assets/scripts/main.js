@@ -119,10 +119,6 @@ cc.Class({
             swallowTouch: true,
             // クリック時の動作を登録
             onTouchBegan: function(touch, event){
-                // タイマーリセット
-                self.charaTimer = self.initial_time;
-                self.textTimer = 0;
-
                 // ストーリーを全部表示し終わったなら、returnする
                 if(self.now_story_no == self.total_story_num){
                     cc.find('clickIcon').active = false; // クリックアニメーション停止
@@ -130,8 +126,10 @@ cc.Class({
                     return;
                 }
 
+                // タイマーリセット
+                self.charaTimer = self.initial_time;
+                self.textTimer = 0;
                 // 全ストーリー数、全シナリオ数を得る
-                self.total_story_num = self.dataJson.story.length;
                 self.total_scenario_num = self.dataJson.story[self.now_story_no].scenario.length;
                 
 
