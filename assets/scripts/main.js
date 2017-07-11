@@ -27,7 +27,7 @@ cc.Class({
         this.story_no_onclick = 0;
 
         this.talkText.string = "";
-        this.tmp = "";
+        this.talk_tmp = "";
         var self = this;
 
         // JSONファイル読み込み
@@ -129,57 +129,38 @@ cc.Class({
                 // 全ストーリー数、全シナリオ数を得る
                 self.total_scenario_num = self.dataJson.story[self.now_story_no].scenario.length;
                 
-
                 // シナリオが走っているなら、現在のシナリオを完了させる。
                 if(self.scenario_running == true){
-                    self.scenario_running = false; // シナリオ終了扱い
-                    self.show_chara_fin = true; // キャラ表示終了扱い
-                    self.show_text_fin = true; // テキスト表示終了扱い
+                    self.showAllCharaOfNowStory(); // シナリオのキャラ全部を表示させる
+                    self.showAllTalkOfNowStory(); // 今のシナリオのトークを全部表示させる。
+                    cc.find('clickIcon').active = true; // クリックアイコンのアニメーション再生
 
-                    // シナリオのキャラ全部を表示させる
-                    for(var i = 0; i < self.total_scenario_num; i++){
-                        self.setCharacterToNode(self.ary_chara_and_node[i][0], self.ary_chara_and_node[i][1]);
-                    }
+                    self.scenario_running = false; // シナリオ終了状態
+                    self.show_chara_fin = true; // キャラ表示終了状態
+                    self.show_text_fin = true; // テキスト表示終了状態
 
-                    for(var i = 0; i < self.total_scenario_num; i++){
-                        self.now_character = self.dataJson.story[self.now_story_no].scenario[i].character_no;
-                        self.characters[self.now_character - 1].active = true;
-                        self.characters[self.now_character - 1].opacity = 255
-                    }
-
-                    // 今のシナリオのトークを全部表示させる。
-                    self.tmp = "";
-                    for(var i = 0; i < self.total_scenario_num; i++){
-                        for(var j = self.now_talk_no; j < self.dataJson.story[self.now_story_no].scenario[i].talk.length; j++){
-                            self.tmp += self.dataJson.story[self.now_story_no].scenario[i].talk[j] + '\n';
-                        }
-                    }
-                    self.talkText.string = self.tmp;
-
-                    // ストーリーを次に進める /////////////////////////
+                    // ストーリー番号を次に進める
                     self.now_talk_no = 0;
                     self.now_scenario_no = 0;
                     self.now_story_no++;
-                    self.count_for_tmp = 0;///////////////////////////////////
-                    // クリックアイコンのアニメーション再生
-                    cc.find('clickIcon').active = true;
-                    
+                    self.count_for_tmp = 0;
+
                 }else if(self.scenario_running == false){　// シナリオが走っていないなら、次のシナリオを１つ走らせる。
                     cc.find('clickIcon').active = false; // クリックアニメーション停止
                     self.story_no_onclick = self.now_story_no; // クリック時のストーリー番号
-                    self.character_on = true;
+                    self.character_on = true; // キャラ表示のフラグを立てる
                     self.talkText.string = "";
-                    self.tmp = "";
+                    self.talk_tmp = "";
 
                     // キャラクターを非表示にする
                     for(var i = 0; i < self.dataJson.character.length; i++){
                         self.characters[self.characters_no_ary[i] - 1].active = false;
                     }/////////////////////
 
-                    self.show_chara_fin = false;
-                    self.show_text_fin = false;
-                    self.scenario_running = true;
-
+                    self.scenario_running = true; // シナリオ開始のフラグ
+                    self.show_chara_fin = false; // キャラ表示待ちのフラグ
+                    self.show_text_fin = false; // テキスト表示待ちのフラグ
+                    
                     // キャラとノードの配列を得る
                     self.ary_chara_and_node = self.getNowCharacterAndNode();
                 }
@@ -187,6 +168,26 @@ cc.Class({
                 return true;
             },
         }, self.node);
+    },
+
+    showAllCharaOfNowStory: function(){
+        for(var i = 0; i < this.total_scenario_num; i++){
+            this.setCharacterToNode(this.ary_chara_and_node[i][0], this.ary_chara_and_node[i][1]);
+        }
+        for(var i = 0; i < this.total_scenario_num; i++){
+            this.now_character = this.dataJson.story[this.now_story_no].scenario[i].character_no;
+            this.characters[this.now_character - 1].active = true;
+            this.characters[this.now_character - 1].opacity = 255
+        }
+    },
+    showAllTalkOfNowStory: function(){
+        this.talk_tmp = "";
+        for(var i = 0; i < this.total_scenario_num; i++){
+            for(var j = this.now_talk_no; j < this.dataJson.story[this.now_story_no].scenario[i].talk.length; j++){
+                this.talk_tmp += this.dataJson.story[this.now_story_no].scenario[i].talk[j] + '\n';
+            }
+        }
+        this.talkText.string = this.talk_tmp;
     },
 
     update: function (dt) {
@@ -248,7 +249,7 @@ cc.Class({
                 // クリックアイコンのアニメーション再生
                 cc.find('clickIcon').active = true;
             }
-            
+
             this.textTimer += dt;
             this.chara_timer = this.initial_time;
         }
@@ -280,7 +281,7 @@ cc.Class({
         // storyが先に進まない限りは２人の会話は上下につづけて表示する
         if(this.story_no_onclick == this.now_story_no && this.count_for_tmp == 0){
             if(this.talkText.string != ""){
-                this.tmp = this.talkText.string;
+                this.talk_tmp = this.talkText.string;
             }
             this.count_for_tmp++;
         }
@@ -295,7 +296,7 @@ cc.Class({
             show_text_ary.push("\n");
         }
         this.text_tmp = show_text_ary.join("");
-        this.talkText.string = this.tmp + this.text_tmp;
+        this.talkText.string = this.talk_tmp + this.text_tmp;
     },
     
     goNextTalk: function(){
