@@ -234,14 +234,10 @@ cc.Class({
             this.str_ary = scenario.split('');
             this.show_len = Math.floor(this.textTimer / 0.15);
             
-            // トーク表示
-            this.writeText();
-
-            // １トーク表示完了で次のトークへ
-            if(this.show_len == this.str_ary.length){
+            this.writeText(); // トーク表示
+            if(this.show_len == this.str_ary.length){ // １トーク表示完了で次のトークへ
                 this.goNextTalk();
             }
-
             // storyが次に進んだタイミングで一旦停止して、クリックアイコンをスタート
             if( (this.story_no_onclick + 1) == this.now_story_no ){
                 this.scenario_running = false;
@@ -267,6 +263,7 @@ cc.Class({
             }
         }
     },
+
     setCharaspriteToArray: function(){
         this.characters = [];
         this.characters_no_ary = [];
@@ -328,6 +325,7 @@ cc.Class({
         }
         return ary_chara_and_node;
     },
+
     // 登場キャラクタ数に応じて、登場位置を設定
     setCharacterToNode: function(chara_no, node_no){
         switch(node_no){
